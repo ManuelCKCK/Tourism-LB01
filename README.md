@@ -7,3 +7,6 @@ Link: www.shorturl.at/akGMV
 
 Video Penjelasan Seputar Penginstallan dan Penggunaan Aplikasi Web Tourism
 Link: www.shorturl.at/fn456
+
+Onedrive Berisikan File Projectnya
+Link: www.shorturl.at/krMY5
