@@ -32,10 +32,15 @@
                                             <span class="label label-default">{{$attraction->description}}</span>
                                         </td>
                                         <td>
-                                            <div class="btn-group">
-                                      
-                                                  <a method="post" style="color:white; font-weight:bolder" class="btn btn-danger" href="/update_travellist/{{$attraction->id}}">Remove</a>
-                                            </div>
+                                            <form action="{{ route('delete_travellist') }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="btn-group">
+                                                    <input type="hidden" value="{{ $attraction->id }}" name="id_travel">
+                                                    <button type="submit" class="btn btn-danger" style="color:white; font-weight:bolder">Remove</button>
+                                                    {{-- <a method="post" style="color:white; font-weight:bolder" class="btn btn-danger" href="/update_travellist/{{$attraction->id}}">Remove</a> --}}
+                                              </div>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

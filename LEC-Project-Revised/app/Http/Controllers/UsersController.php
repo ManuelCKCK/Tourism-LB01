@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Travellist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,8 +20,8 @@ class UsersController extends Controller
         $id = $user->id;
 
         $attraction_data = DB::table('attractions')
-            ->join('travellist', 'travellist.attraction_id', '=', 'attractions.id')
-            ->where('travellist.user_id', '=', $id)
+            ->join('travellists', 'travellists.attraction_id', '=', 'attractions.id')
+            ->where('travellists.user_id', '=', $id)
             ->paginate(4);
         return view('travellist', compact('attraction_data', 'id'));
     }
@@ -36,11 +37,17 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+    public function delete_travellist(Request $request)
+    {
+        $delete_posts = Travellist::find($request->id_travel)->delete();
+        return redirect()->route('travellist', compact('delete_posts'));
+    }
+
     public function add_travellist($attraction_id)
     {
         $user = Auth::user();
         $id = $user->id;
-        DB::table('travellist')->insert([
+        DB::table('travellists')->insert([
             'user_id' => $id,
             'attraction_id' => $attraction_id,
         ]);
